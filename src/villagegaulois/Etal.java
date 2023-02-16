@@ -16,6 +16,7 @@ public class Etal {
 	public Gaulois getVendeur() {
 		return vendeur;
 	}
+	
 
 	public void occuperEtal(Gaulois vendeur, String produit, int quantite) {
 		this.vendeur = vendeur;
@@ -26,9 +27,11 @@ public class Etal {
 	}
 
 	public String libererEtal() {
+		if (!etalOccupe) {
+			throw new IllegalStateException("L'étal n'est pas occupé");
+		}
 		etalOccupe = false;
-		StringBuilder chaine = new StringBuilder(
-				"Le vendeur " + vendeur.getNom() + " quitte son étal, ");
+		StringBuilder chaine = new StringBuilder("Le vendeur " + vendeur.getNom() + " quitte son étal, ");
 		int produitVendu = quantiteDebutMarche - quantite;
 		if (produitVendu > 0) {
 			chaine.append(
