@@ -79,8 +79,8 @@ public class Village {
 			StringBuilder chaine = new StringBuilder();
 			int nbEtalVide = 0;
 			for(Etal etal : etals) {
-				if (!etal.isEtalOccupe()) {
-					chaine.append(etal.afficherEtal());
+				if (etal.isEtalOccupe()) {
+					chaine.append("     - " + etal.afficherEtal());
 				}
 				else {
 					nbEtalVide+=1;
@@ -94,7 +94,7 @@ public class Village {
 	public String installerVendeur(Gaulois vendeur, String produit,int nbProduit) {
 		StringBuilder chaine = new StringBuilder();
 		
-		chaine.append(vendeur.getNom() + "cherche un endroit pour vendre " + nbProduit + " " + produit + "\n");
+		chaine.append(vendeur.getNom() + " cherche un endroit pour vendre " + nbProduit + " " + produit + "\n");
 		int numEtal = marche.trouverEtalLibre();
 		if (numEtal == -1) {
 			chaine.append("Le vendeur " + vendeur.getNom() + " n'a pas pu trouver d'étal de libre.\n");
@@ -115,7 +115,7 @@ public class Village {
 		}
 		chaine.append("Les vendeurs qui proposent des " + produit + " sont : \n");
 		for (Etal etal : etalsVendeursProduit) {
-			if (etal.isEtalOccupe()) {
+			if (etal != null && etal.isEtalOccupe()) {
 				chaine.append("   - " + etal.getVendeur().getNom() + "\n");
 			}
 		}
